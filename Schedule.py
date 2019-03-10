@@ -25,13 +25,18 @@ class Schedule:
 
     def display_schedule(self):
         """
-        Class for Displaying the schedule
+        This prints out the schedule
         :return:
         """
         for slot in self.time_slots:
             print("At time::", slot[0], slot[1], "is scheduled.")
 
     def add_event(self, event):
+        """
+        This adds an event to the schedule and then updates it
+        :param event:  The event to be added to the schedule
+        :return:
+        """
         self.events.append(event)
         self.update_schedule()
 

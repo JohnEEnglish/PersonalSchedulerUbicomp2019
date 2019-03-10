@@ -11,7 +11,7 @@ def receive_and_create_event():
 
     while created_event.get_duration() == -1:
         try:
-            event_length = int(input("Please enter the length in hours of your event: "))
+            event_length = int(input("Please enter the length in half hours of your event: "))
             assert 0 <= int(event_length) <= 24, "Your event lasts more than a day."
             created_event.set_duration(event_length)
         except:

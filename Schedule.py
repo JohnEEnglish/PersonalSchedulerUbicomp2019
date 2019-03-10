@@ -24,6 +24,10 @@ class Schedule:
                     current_time_index += 1
 
     def display_schedule(self):
+        """
+        Class for Displaying the schedule
+        :return:
+        """
         for slot in self.time_slots:
             print("At time::", slot[0], slot[1], "is scheduled.")
 

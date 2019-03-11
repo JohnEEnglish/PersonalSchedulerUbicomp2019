@@ -9,6 +9,7 @@ def receive_and_create_event():
     """
     created_event = Event()
 
+    # TODO Make a function
     while created_event.get_duration() == -1:
         try:
             event_length = int(input("Please enter the length in half hours of your event: "))
@@ -17,6 +18,7 @@ def receive_and_create_event():
         except:
             pass
 
+    # TODO Make a function
     # while created_event.get_time() == "-1:00":
     #     try:
     #         event_time = input("Please enter the starting time of your event: ")
@@ -26,10 +28,19 @@ def receive_and_create_event():
     #     except:
     #         pass
 
+    # TODO Make a function
     while created_event.get_name() == "":
         try:
-            event_time = input("Please enter the name of your event: ")
-            created_event.set_name(event_time)
+            event_name = input("Please enter the name of your event: ")
+            created_event.set_name(event_name)
+        except:
+            pass
+
+    # TODO Make a function
+    while created_event.get_priority() == -1:
+        try:
+            event_priority = input("Please enter the priority of your as a positive integer(higher is more important): ")
+            created_event.set_priority(event_priority)
         except:
             pass
 
@@ -45,7 +56,7 @@ def main_interactive_one():
     This system will ask you for a list of events and give you an schedule optimized around giving you as much 
     free time as possible.
     """)
-    while user_continue == True:
+    while user_continue:
         interactive_schedule.add_event(receive_and_create_event())
         print("Would you like to add another event?")
         prompt_continue = None
@@ -62,6 +73,7 @@ def main_interactive_one():
             except:
                 pass
     interactive_schedule.display_schedule()
+
 
 def main_one():
     event_one = Event(1, name="Tennis")

@@ -13,6 +13,7 @@ class Schedule:
 
     def update_schedule(self):
         current_time_index = 0
+        self.events = sorted(self.events, key=lambda x: x.get_priority(), reverse=True)
         for t in self.time_slots:
             t[1] = "No event"
         for event in self.events:
@@ -29,7 +30,7 @@ class Schedule:
         :return:
         """
         for slot in self.time_slots:
-            print("At time::", slot[0], slot[1], "is scheduled.")
+            print("At time:", slot[0], slot[1], "is scheduled.")
 
     def add_event(self, event):
         """

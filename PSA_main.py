@@ -53,7 +53,7 @@ def main_interactive_one():
     print("""
     Hello and welcome to the Personal Scheduling Assistant.
     
-    This system will ask you for a list of events and give you an schedule optimized around giving you as much 
+    This system will ask you for a list of events and return a schedule optimized around giving you as much 
     free time as possible.
     """)
     while user_continue:

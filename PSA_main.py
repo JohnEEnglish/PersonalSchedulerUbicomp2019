@@ -37,13 +37,23 @@ def receive_and_create_event():
             pass
 
     # TODO Make a function
-    while created_event.get_priority() == -1:
+    while created_event.get_priority() == 0:
         try:
-            event_priority = input("Please enter the priority of your as a positive integer(higher is more important): ")
-            created_event.set_priority(event_priority)
+            event_priority = input("""                               
+Please enter a "priority factor" from the options below:
+    1 - Est. Traffic Conditions
+    2 - Weather
+    3 - Est. Driving Time
+    4 - Destination Popularity
+    5 - Est. Wait Time
+
+(To recommend event with default parameters, just press enter) """)
+            if event_priority:
+                created_event.set_priority(event_priority)
+            created_event.display_event_priority()
+            break
         except:
             pass
-
     return created_event
 
 
@@ -51,10 +61,10 @@ def main_interactive_one():
     user_continue = True
     interactive_schedule = Schedule()
     print("""
-    Hello and welcome to the Personal Scheduling Assistant.
-    
-    This system will ask you for a list of events and return a schedule optimized around giving you as much 
-    free time as possible.
+Hello and welcome to the Personal Scheduling Assistant.
+
+This system will ask you for a list of events and return a schedule optimized around giving you as much 
+free time as possible.
     """)
     while user_continue:
         interactive_schedule.add_event(receive_and_create_event())
@@ -62,7 +72,7 @@ def main_interactive_one():
         prompt_continue = None
         while prompt_continue is None:
             try:
-                yes_no = input("(yes/no)")
+                yes_no = input("(yes/no) ")
                 if yes_no.lower() == "yes":
                     user_continue = True
                 elif yes_no.lower() == "no":

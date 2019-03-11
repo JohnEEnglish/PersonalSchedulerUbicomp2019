@@ -3,7 +3,7 @@ class Event:
     This class is where we will be implementing all of our event characteristics
     """
 
-    def __init__(self, duration=-1, time="-1:00", name="", priority=-1):
+    def __init__(self, duration=-1, time="-1:00", name="", priority=0):
         self.time = time
         self.duration = duration
         self.name = name

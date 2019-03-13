@@ -41,17 +41,20 @@ def receive_and_create_event():
         try:
             event_priority = input("""                               
 Please enter a "priority factor" from the options below:
+    0 - Use Default Prioritization
     1 - Est. Traffic Conditions
     2 - Weather
     3 - Est. Driving Time
     4 - Destination Popularity
     5 - Est. Wait Time
-
-(To recommend event with default parameters, just press enter) """)
-            if event_priority:
-                created_event.set_priority(event_priority)
-            created_event.display_event_priority()
-            break
+    
+    Your selection: """)
+            if int(event_priority) in created_event.priority_dict:
+                created_event.set_priority(int(event_priority))
+                created_event.display_event_priority()
+                break
+            else:
+                print("Invalid Selection.")
         except:
             pass
     return created_event

@@ -8,6 +8,12 @@ class Event:
         self.duration = duration
         self.name = name
         self.priority = priority
+        self.priority_dict = {0: "Default",
+                              1: "Est. Traffic Conditions",
+                              2: "Weather",
+                              3: "Est. Driving Time",
+                              4: "Destination Popularity",
+                              5: "Estimated Wait Time"}
 
     # Display event attributes section
     def display_event_length(self):
@@ -20,7 +26,7 @@ class Event:
         print("The event name is:", self.name)
 
     def display_event_priority(self):
-        print("The priority of this event is:", self.priority)
+        print("The priority of this event is:", self.priority_dict[self.priority])
 
     # Set event attributes section
     def set_duration(self, duration=-1):

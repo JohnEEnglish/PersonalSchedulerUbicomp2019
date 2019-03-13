@@ -64,10 +64,10 @@ def main_interactive_one():
     user_continue = True
     interactive_schedule = Schedule()
     print("""
-Hello and welcome to the Personal Scheduling Assistant.
+Hello and welcome to the Personal Scheduling Assistant (P.S.A.).
 
-This system will ask you for a list of events and return a schedule optimized around giving you as much 
-free time as possible.
+This system will recommend the best time for you to schedule
+a new event, based on a variety of factors.
     """)
     while user_continue:
         interactive_schedule.add_event(receive_and_create_event())
@@ -86,15 +86,16 @@ free time as possible.
             except:
                 pass
     interactive_schedule.display_schedule()
+    interactive_schedule.display_recommendation()
 
 
-def main_one():
-    event_one = Event(1, name="Tennis")
-    event_two = Event(2, name="Scuba Diving")
-    schedule_main_one = Schedule()
-    schedule_main_one.add_event(event_one)
-    schedule_main_one.add_event(event_two)
-    schedule_main_one.display_schedule()
+#def main_one():
+#    event_one = Event(1, name="Tennis")
+#    event_two = Event(2, name="Scuba Diving")
+#    schedule_main_one = Schedule()
+#    schedule_main_one.add_event(event_one)
+#    schedule_main_one.add_event(event_two)
+#    schedule_main_one.display_schedule()
 
 
 if __name__ == "__main__":

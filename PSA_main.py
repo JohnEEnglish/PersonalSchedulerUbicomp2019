@@ -37,13 +37,26 @@ def receive_and_create_event():
             pass
 
     # TODO Make a function
-    while created_event.get_priority() == -1:
+    while created_event.get_priority() == 0:
         try:
-            event_priority = input("Please enter the priority of your as a positive integer(higher is more important): ")
-            created_event.set_priority(event_priority)
+            event_priority = input("""                               
+Please enter a "priority factor" from the options below:
+    0 - Use Default Prioritization
+    1 - Est. Traffic Conditions
+    2 - Weather
+    3 - Est. Driving Time
+    4 - Destination Popularity
+    5 - Est. Wait Time
+    
+    Your selection: """)
+            if int(event_priority) in created_event.priority_dict:
+                created_event.set_priority(int(event_priority))
+                created_event.display_event_priority()
+                break
+            else:
+                print("Invalid Selection.")
         except:
             pass
-
     return created_event
 
 
@@ -51,10 +64,10 @@ def main_interactive_one():
     user_continue = True
     interactive_schedule = Schedule()
     print("""
-    Hello and welcome to the Personal Scheduling Assistant.
-    
-    This system will ask you for a list of events and return a schedule optimized around giving you as much 
-    free time as possible.
+Hello and welcome to the Personal Scheduling Assistant (P.S.A.).
+
+This system will recommend the best time for you to schedule
+a new event, based on a variety of factors.
     """)
     while user_continue:
         interactive_schedule.add_event(receive_and_create_event())
@@ -62,7 +75,7 @@ def main_interactive_one():
         prompt_continue = None
         while prompt_continue is None:
             try:
-                yes_no = input("(yes/no)")
+                yes_no = input("(yes/no) ")
                 if yes_no.lower() == "yes":
                     user_continue = True
                 elif yes_no.lower() == "no":
@@ -73,15 +86,16 @@ def main_interactive_one():
             except:
                 pass
     interactive_schedule.display_schedule()
+    interactive_schedule.display_recommendation()
 
 
-def main_one():
-    event_one = Event(1, name="Tennis")
-    event_two = Event(2, name="Scuba Diving")
-    schedule_main_one = Schedule()
-    schedule_main_one.add_event(event_one)
-    schedule_main_one.add_event(event_two)
-    schedule_main_one.display_schedule()
+#def main_one():
+#    event_one = Event(1, name="Tennis")
+#    event_two = Event(2, name="Scuba Diving")
+#    schedule_main_one = Schedule()
+#    schedule_main_one.add_event(event_one)
+#    schedule_main_one.add_event(event_two)
+#    schedule_main_one.display_schedule()
 
 
 if __name__ == "__main__":

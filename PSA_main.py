@@ -8,34 +8,30 @@ def receive_and_create_event():
     """
     created_event = Event()
 
-    # TODO Make a function
-    while created_event.get_duration() == -1:
-        try:
-            event_length = int(input("Please enter the length in half hours of your event: "))
-            assert 0 <= int(event_length) <= 24, "Your event lasts more than a day."
-            created_event.set_duration(event_length)
-        except:
-            pass
-
-    # TODO Make a function
-    # while created_event.get_time() == "-1:00":
-    #     try:
-    #         event_time = input("Please enter the starting time of your event: ")
-    #         assert 0 <= int(event_time[:2]) <= 24, "The hour of your event time is not valid."
-    #         assert 0 <= int(event_time[3:5]) <= 59, "The minutes of your event time is not valid."
-    #         created_event.set_time(event_time)
-    #     except:
-    #         pass
-
-    # TODO Make a function
+    # NAME
     while created_event.get_name() == "":
         try:
             event_name = input("Please enter the name of your event: ")
             created_event.set_name(event_name)
         except:
             pass
-
-    # TODO Make a function
+        
+    # DURATION    
+    while created_event.get_duration() == -1:
+        try:
+            event_length = int(input("Please enter the length in half hours of your event: "))
+            assert 0 <= int(event_length) <= 24, "Your event lasts more than a day."
+            created_event.set_duration(event_length)
+        except:
+            pass        
+    # LOCATION
+    while created_event.get_location() == "":
+        try:
+            event_loc = input("Please enter the location of your event: ")
+            created_event.set_location(event_loc)
+        except:
+            pass
+    # PRIORITY
     while created_event.get_priority() == 0:
         try:
             event_priority = input("""                               
@@ -58,6 +54,14 @@ Please enter a "priority factor" from the options below:
             pass
     return created_event
 
+    # while created_event.get_time() == "-1:00":
+    #     try:
+    #         event_time = input("Please enter the starting time of your event: ")
+    #         assert 0 <= int(event_time[:2]) <= 24, "The hour of your event time is not valid."
+    #         assert 0 <= int(event_time[3:5]) <= 59, "The minutes of your event time is not valid."
+    #         created_event.set_time(event_time)
+    #     except:
+    #         pass
 
 def main_interactive_one():
     user_continue = True
@@ -99,4 +103,5 @@ def main_one():
 
 
 if __name__ == "__main__":
-    main_one()
+#    main_one()
+    main_interactive_one()

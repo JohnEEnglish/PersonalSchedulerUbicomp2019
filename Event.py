@@ -3,10 +3,11 @@ class Event:
     This class is where we will be implementing all of our event characteristics
     """
 
-    def __init__(self, duration=-1, time="-1:00", name="", priority=0):
+    def __init__(self, duration=-1, time="-1:00", name="", location = "", priority=0):
         self.time = time
         self.duration = duration
         self.name = name
+        self.location = location
         self.priority = priority
         self.priority_dict = {0: "Default",
                               1: "Est. Traffic Conditions",
@@ -24,6 +25,9 @@ class Event:
 
     def display_event_name(self):
         print("The event name is:", self.name)
+        
+    def display_event_loc(self):
+        print("The event name is:", self.location)        
 
     def display_event_priority(self):
         print("The priority of this event is:", self.priority_dict[self.priority])
@@ -37,6 +41,9 @@ class Event:
 
     def set_name(self, name=""):
         self.name = name
+        
+    def set_location(self, location=""):
+        self.location = location        
 
     def set_priority(self, priority=-1):
         self.priority = priority
@@ -50,6 +57,9 @@ class Event:
 
     def get_name(self):
         return self.name
+    
+    def get_location(self):
+        return self.location    
 
     def get_priority(self):
         return self.priority

@@ -107,11 +107,11 @@ def main_one():
     event_two = Event(2, name="Scuba Diving")
     schedule_main_one = Schedule()
     schedule_main_one.add_event(event_one)
-    schedule_main_one.display_recommendation("Tennis")
+    # schedule_main_one.display_recommendation("Tennis")
     schedule_main_one.add_event(event_two)
-    # schedule_main_one.display_schedule()
+    schedule_main_one.display_schedule()
 
 
 if __name__ == "__main__":
-#    main_one()
-    main_interactive_one()
+   main_one()
+    # main_interactive_one()

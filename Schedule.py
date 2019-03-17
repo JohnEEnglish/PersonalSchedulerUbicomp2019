@@ -21,16 +21,27 @@ class Schedule:
 
     def make_schedule_from_events(self):
         from copy import deepcopy
+
         current_time_index = 0
         temp_slots = deepcopy(self.time_slots)
         for event in self.events:
             for time_slice in range(event.get_duration()):
                 temp_slots[current_time_index][1] = event.get_name()
                 current_time_index += 1
-                #                if time_slice == event.get_duration() - 1:
-                #                    self.time_slots[current_time_index][1] = "Traveling"
-                #                    current_time_index += 1
+                if time_slice == event.get_duration() - 1:
+                    current_time_index = self.travel_offset(time_slots=temp_slots,
+                                                            travel_time=2,
+                                                            c_t_index=current_time_index)
+
         return temp_slots
+
+    @staticmethod
+    def travel_offset(time_slots=[], travel_time=1, c_t_index=0):
+        for x in range(travel_time):
+            time_slots[c_t_index][1] = "Traveling"
+            c_t_index += 1
+
+        return c_t_index
 
     def display_schedule(self):
         """
@@ -49,7 +60,6 @@ class Schedule:
         """
         self.events.append(event)
         self.update_schedule()
-
 
     def make_time_slot_name_list(self):
         time_slot_list = []

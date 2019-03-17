@@ -14,17 +14,23 @@ class Schedule:
             self.time_slots.append([slot, "No Event"])
 
     def update_schedule(self):
-        current_time_index = 0
         self.events = sorted(self.events, key=lambda x: x.get_priority(), reverse=True)
         for t in self.time_slots:
             t[1] = "No event"
+        self.time_slots = self.make_schedule_from_events()
+
+    def make_schedule_from_events(self):
+        from copy import deepcopy
+        current_time_index = 0
+        temp_slots = deepcopy(self.time_slots)
         for event in self.events:
             for time_slice in range(event.get_duration()):
-                self.time_slots[current_time_index][1] = event.get_name()
+                temp_slots[current_time_index][1] = event.get_name()
                 current_time_index += 1
-#                if time_slice == event.get_duration() - 1:
-#                    self.time_slots[current_time_index][1] = "Traveling"
-#                    current_time_index += 1
+                #                if time_slice == event.get_duration() - 1:
+                #                    self.time_slots[current_time_index][1] = "Traveling"
+                #                    current_time_index += 1
+        return temp_slots
 
     def display_schedule(self):
         """
@@ -57,5 +63,8 @@ class Schedule:
         return time_slot_list
     
     #TODO:  function to display recommended scheduling time to the user   
-    def display_recommendation(self):
-        print("The recommended scheduling time for this event is:")
+    def display_recommendation(self, rec_event_name="No Event"):
+        for e in self.time_slots:
+            # print(e)
+            if e[1] == rec_event_name:
+                print("The recommended scheduling time for this event is:", e[0])

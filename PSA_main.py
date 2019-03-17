@@ -1,7 +1,6 @@
 from Event import Event
 from Schedule import Schedule
 
-
 def receive_and_create_event():
     """
     Receives the input to create an event
@@ -89,14 +88,15 @@ a new event, based on a variety of factors.
     interactive_schedule.display_recommendation()
 
 
-#def main_one():
-#    event_one = Event(1, name="Tennis")
-#    event_two = Event(2, name="Scuba Diving")
-#    schedule_main_one = Schedule()
-#    schedule_main_one.add_event(event_one)
-#    schedule_main_one.add_event(event_two)
-#    schedule_main_one.display_schedule()
+def main_one():
+    event_one = Event(1, name="Tennis")
+    event_two = Event(2, name="Scuba Diving")
+    schedule_main_one = Schedule()
+    schedule_main_one.add_event(event_one)
+    schedule_main_one.display_recommendation("Tennis")
+    schedule_main_one.add_event(event_two)
+    # schedule_main_one.display_schedule()
 
 
 if __name__ == "__main__":
-    main_interactive_one()
+    main_one()

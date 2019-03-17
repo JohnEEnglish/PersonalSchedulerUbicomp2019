@@ -62,9 +62,29 @@ class Schedule:
             time_slot_list.append(hour + ":30")
         return time_slot_list
     
-    #TODO:  function to display recommended scheduling time to the user   
-    def display_recommendation(self, rec_event_name="No Event"):
+    # Function to display recommended scheduling time to the user   
+    def display_recommendation(self, rec_event_name):
         for e in self.time_slots:
             # print(e)
             if e[1] == rec_event_name:
-                print("The recommended scheduling time for this event is:", e[0])
+                print("Ok, based on your existing calendar events, I recommend you leave for", 
+                      rec_event_name, "at", e[0])
+                print("""
+Would you like to add this event to your calendar?""")
+                try:
+                    yes_no = input("(yes/no) ---> ")
+                    if yes_no.lower() == "yes":
+                        user_continue = True
+                    elif yes_no.lower() == "no":
+                        user_continue = False
+                    else:
+                        user_continue = None
+                        
+                    if user_continue == True:
+                        print("""
+Functionality pending.""")
+                except:
+                    pass
+                print("""
+Thank you for using PSA!""")
+                break

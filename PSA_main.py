@@ -11,26 +11,34 @@ def receive_and_create_event():
     # NAME
     while created_event.get_name() == "":
         try:
-            event_name = input("Please enter the name of your event: ")
+            event_name = input("What is your event called? ---> ")
             created_event.set_name(event_name)
         except:
             pass
         
-    # DURATION    
-    while created_event.get_duration() == -1:
-        try:
-            event_length = int(input("Please enter the length in half hours of your event: "))
-            assert 0 <= int(event_length) <= 24, "Your event lasts more than a day."
-            created_event.set_duration(event_length)
-        except:
-            pass        
     # LOCATION
     while created_event.get_location() == "":
         try:
-            event_loc = input("Please enter the location of your event: ")
+            event_loc = input("Ok, where is this event located? ---> ")
             created_event.set_location(event_loc)
         except:
-            pass
+            pass        
+        
+    # DURATION    
+    while created_event.get_duration() == -1:
+        try:
+            event_length = int(input("""
+Ok, how long do you expect to be there?: 
+    
+(Please note this prototype only supports lengths of time comprised of half-hour increments,
+up to a maximum value of 48.
+For example, if your event will last 1.5 hours, please enter 3). 
+---> """))
+            assert 0 <= int(event_length) <= 48, "Your event lasts more than a day."
+            created_event.set_duration(event_length)
+        except:
+            pass        
+        
     # PRIORITY
     while created_event.get_priority() == 0:
         try:
@@ -46,7 +54,7 @@ Please enter a "priority factor" from the options below:
     Your selection: """)
             if int(event_priority) in created_event.priority_dict:
                 created_event.set_priority(int(event_priority))
-                created_event.display_event_priority()
+#                created_event.display_event_priority()
                 break
             else:
                 print("Invalid Selection.")
@@ -73,23 +81,25 @@ This system will recommend the best time for you to schedule
 a new event, based on a variety of factors.
     """)
     while user_continue:
-        interactive_schedule.add_event(receive_and_create_event())
-        print("Would you like to add another event?")
-        prompt_continue = None
-        while prompt_continue is None:
-            try:
-                yes_no = input("(yes/no) ")
-                if yes_no.lower() == "yes":
-                    user_continue = True
-                elif yes_no.lower() == "no":
-                    user_continue = False
-                else:
-                    user_continue = None
-                prompt_continue = user_continue
-            except:
-                pass
+        user_event = receive_and_create_event()
+        interactive_schedule.add_event(user_event)
+        user_continue = False
+#        print("Would you like to add another event?")
+#        prompt_continue = None
+#        while prompt_continue is None:
+#            try:
+#                yes_no = input("(yes/no) ")
+#                if yes_no.lower() == "yes":
+#                    user_continue = True
+#                elif yes_no.lower() == "no":
+#                    user_continue = False
+#                else:
+#                    user_continue = None
+#                prompt_continue = user_continue
+#            except:
+#                pass
     interactive_schedule.display_schedule()
-    interactive_schedule.display_recommendation()
+    interactive_schedule.display_recommendation(user_event.get_name())
 
 
 def main_one():

@@ -3,12 +3,13 @@ class Event:
     This class is where we will be implementing all of our event characteristics
     """
 
-    def __init__(self, duration=-1, time="-1:00", name="", location = "", priority=0):
+    def __init__(self, duration=-1, time="-1:00", name="", location = "", priority=0, hours_of_operation=(0, 24)):
         self.time = time
         self.duration = duration
         self.name = name
         self.location = location
         self.priority = priority
+        self.hours_of_operation = hours_of_operation
         self.priority_dict = {0: "Default",
                               1: "Est. Traffic Conditions",
                               2: "Weather",
@@ -32,6 +33,9 @@ class Event:
     def display_event_priority(self):
         print("The priority of this event is:", self.priority_dict[self.priority])
 
+    def display_event_hours_of_operation(self):
+        print("The hours of availability operation for this venue are:", self.operation)
+
     # Set event attributes section
     def set_duration(self, duration=-1):
         self.duration = duration
@@ -47,6 +51,9 @@ class Event:
 
     def set_priority(self, priority=-1):
         self.priority = priority
+
+    def set_hours_of_operation(self, hours_of_operation=(0, 24)):
+        self.hours_of_operation = hours_of_operation
 
     # Get event attributes section
     def get_duration(self):
@@ -64,3 +71,5 @@ class Event:
     def get_priority(self):
         return self.priority
 
+    def get_hours_of_operation(self):
+        return self.hours_of_operation

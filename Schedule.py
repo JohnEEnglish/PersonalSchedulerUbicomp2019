@@ -82,7 +82,7 @@ class Schedule:
                                 # print("temp_slot attributes:", temp_slots[start_time + current_time])
                 except:
                     print("""
-                          DUE TO THE ESTIMATED STATE OF EXTERNAL FACTORS TODAY, SCHEDULING THIS EVENT IS NOT RECOMMENDED.
+DUE TO THE ESTIMATED STATE OF EXTERNAL FACTORS TODAY, SCHEDULING THIS EVENT IS NOT RECOMMENDED.
                           """)
                     break
                 if valid_time:
@@ -129,7 +129,7 @@ class Schedule:
         :return:
         """
         for slot in self.time_slots[self.morning_buffer * 2: self.evening_buffer*2-1]:
-            print("At time:", slot[0], slot[1], "is scheduled.")
+            print("At time:", slot[0], slot[1], "is scheduled. External disruption was category:", slot[2])
 #            print("")
 
     def add_event(self, event):

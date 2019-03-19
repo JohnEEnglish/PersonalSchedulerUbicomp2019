@@ -143,6 +143,7 @@ def main_demo():
     display_welcome_msg()
     user_event = receive_and_create_event()
     schedule_main_one.add_event(user_event)
+    schedule_main_one.display_rec(user_event.get_name())
     schedule_main_one.display_schedule()
 
 

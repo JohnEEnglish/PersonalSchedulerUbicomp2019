@@ -7,7 +7,7 @@ class Schedule:
         self.events = event_list
         self.time_slots = []
         self.morning_buffer = 6 # No events will be scheduled prior to this time (6am)
-        self.evening_buffer = 21 # No events will be scheduled after this time (10pm)
+        self.evening_buffer = 23 # No events will be scheduled after this time (10pm)
 
         time_slot_name_list = self.make_time_slot_name_list()
         for slot in time_slot_name_list:
@@ -26,13 +26,13 @@ class Schedule:
         temp_slots = deepcopy(self.time_slots)
 
         for event in self.events:
-            if event.get_priority() == 5:
-                from random import choice
-                wait_times = [0] * 9 + [1] * 3 + [2] * 1
-                event_wait_time = choice(wait_times)
-                current_time_index = self.wait_time_offset(time_slots=temp_slots,
-                                                           wait_time=event_wait_time,
-                                                           c_t_index=current_time_index)
+            # if event.get_priority() == 5:
+            #     from random import choice
+            #     wait_times = [0] * 9 + [1] * 3 + [2] * 1
+            #     event_wait_time = choice(wait_times)
+            #     # current_time_index = self.wait_time_offset(time_slots=temp_slots,
+            #     #                                            wait_time=event_wait_time,
+            #     #                                            c_t_index=current_time_index)
 
             for time_slice in range(event.get_duration()):
                 temp_slots[current_time_index][1] = event.get_name()
@@ -45,31 +45,49 @@ class Schedule:
         return temp_slots
 
     def make_schedule_from_events_static(self):
+        """
+        This can be thought to run with the following psudocode:
+        for every event in a prioritized event list:
+            for every time slot that both within our schedule's time and the operating hours of our event's venue:
+                check to see if there is space to fit the event starting at the current time slot:
+                    if there is add the event
+                    if there isn't move to the next time slot
+        :return:
+        """
         from random import choice
         temp_slot_name_list = self.make_time_slot_name_list_no_buffers()
         temp_slots = []
+        rand_pool = [0]*27 + [1]*9 + [2]*3
         for slot in temp_slot_name_list:
-            temp_slots.append([slot, "No event", 0])
+            temp_slots.append([slot, "No event", choice(rand_pool)])
         travel_time = 1
         for event in self.events:
             for start_time in range(max([self.morning_buffer*2, event.get_hours_of_operation()[0]*2]),
                                     min([self.evening_buffer*2 - 1, event.get_hours_of_operation()[1]*2 - 1])):
                 valid_time = True
-                for current_time in range(event.get_duration() + travel_time):
-                    # print("current_time:", current_time)
-                    if temp_slots[start_time + current_time][1] != 'No event' \
-                            or temp_slots[start_time + current_time][2] > 1:
-                        valid_time = False
-                        # print("temp_slot attributes:", temp_slots[start_time + current_time])
+                if event.static:
+                    for current_time in range(event.get_duration() + travel_time):
+                        # print("current_time:", current_time)
+                        if temp_slots[start_time + current_time][1] != 'No event':
+                            valid_time = False
+                            # print("temp_slot attributes:", temp_slots[start_time + current_time])
+                            print("ERROR MULTIPLE STATIC EVENTS BEING SCHEDULED ON TOP OF ONE ANOTHER")
+                else:
+                    for current_time in range(event.get_duration() + travel_time):
+                        # print("current_time:", current_time)
+                        if temp_slots[start_time + current_time][1] != 'No event' \
+                                or temp_slots[start_time + current_time][2] > 1:
+                            valid_time = False
+                            # print("temp_slot attributes:", temp_slots[start_time + current_time])
                 if valid_time:
                     assert temp_slots[start_time + current_time][1] == 'No event', "ERROR"
                     current_time_index = start_time
-                    if event.get_priority() == 5:
-                        wait_times = [0] * 9 + [1] * 3 + [2] * 1
-                        event_wait_time = choice(wait_times)
-                        current_time_index = self.wait_time_offset(time_slots=temp_slots,
-                                                                   wait_time=event_wait_time,
-                                                                   c_t_index=current_time_index)
+                    # if event.get_priority() == 5:
+                        # wait_times = [0] * 9 + [1] * 3 + [2] * 1
+                        # event_wait_time = choice(wait_times)
+                        # current_time_index = self.wait_time_offset(time_slots=temp_slots,
+                        #                                            wait_time=event_wait_time,
+                        #                                            c_t_index=current_time_index)
 
                     for time_slice in range(event.get_duration()):
                         temp_slots[current_time_index][1] = event.get_name()
@@ -104,7 +122,7 @@ class Schedule:
         This prints out the schedule
         :return:
         """
-        for slot in self.time_slots:
+        for slot in self.time_slots[self.morning_buffer * 2: self.evening_buffer*2-1]:
             print("At time:", slot[0], slot[1], "is scheduled.")
             print("")
 

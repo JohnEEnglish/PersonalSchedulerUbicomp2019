@@ -3,12 +3,14 @@ class Event:
     This class is where we will be implementing all of our event characteristics
     """
 
-    def __init__(self, duration=-1, time="-1:00", name="", location = "", priority=0, hours_of_operation=(0, 24)):
+    def __init__(self, duration=-1, time="-1:00", name="", location = "",
+                 priority=0, hours_of_operation=(0, 24), static_flag=False):
         self.time = time
         self.duration = duration
         self.name = name
         self.location = location
         self.priority = priority
+        self.static = static_flag
         self.hours_of_operation = hours_of_operation
         self.priority_dict = {0: "Default",
                               1: "Traffic Conditions",
@@ -35,6 +37,9 @@ class Event:
     def display_event_hours_of_operation(self):
         print("The hours of availability operation for this venue are:", self.operation)
 
+    def display_static(self):
+        print("Is the event static:", self.static)
+
     # Set event attributes section
     def set_duration(self, duration=-1):
         self.duration = duration
@@ -54,6 +59,9 @@ class Event:
     def set_hours_of_operation(self, hours_of_operation=(0, 24)):
         self.hours_of_operation = hours_of_operation
 
+    def set_static(self, static_flag=False):
+        self.hours_of_operation = static_flag
+
     # Get event attributes section
     def get_duration(self):
         return self.duration
@@ -72,3 +80,6 @@ class Event:
 
     def get_hours_of_operation(self):
         return self.hours_of_operation
+
+    def get_static(self):
+        return self.static

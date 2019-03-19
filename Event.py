@@ -10,11 +10,10 @@ class Event:
         self.location = location
         self.priority = priority
         self.priority_dict = {0: "Default",
-                              1: "Est. Traffic Conditions",
+                              1: "Traffic Conditions",
                               2: "Weather",
-                              3: "Est. Driving Time",
-                              4: "Destination Popularity",
-                              5: "Estimated Wait Time"}
+                              3: "Crowd Level",
+                              4: "Wait Time"}
 
     # Display event attributes section
     def display_event_length(self):

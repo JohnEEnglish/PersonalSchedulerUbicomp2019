@@ -45,11 +45,10 @@ For example, if your event will last 1.5 hours, please enter 3).
             event_priority = input("""                               
 Please enter a "priority factor" from the options below:
     0 - Use Default Prioritization
-    1 - Est. Traffic Conditions
+    1 - Traffic Conditions
     2 - Weather
-    3 - Est. Driving Time
-    4 - Destination Popularity
-    5 - Est. Wait Time
+    3 - Crowd Level
+    4 - Wait Time
     
     Your selection: """)
             if int(event_priority) in created_event.priority_dict:

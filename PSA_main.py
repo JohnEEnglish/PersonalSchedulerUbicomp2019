@@ -102,8 +102,8 @@ a new event, based on a variety of factors.
 
 
 def main_one():
-    event_one = Event(1, name="Tennis")
-    event_two = Event(2, name="Scuba Diving")
+    event_one = Event(1, name="Tennis", priority=5)
+    event_two = Event(2, name="Scuba Diving", priority=5)
     schedule_main_one = Schedule()
     schedule_main_one.add_event(event_one)
     # schedule_main_one.display_recommendation("Tennis")

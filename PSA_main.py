@@ -26,13 +26,13 @@ def receive_and_create_event():
         except:
             pass
         
-    # LOCATION
-    while created_event.get_location() == "":
-        try:
-            event_loc = input("Ok, where is this event located? ---> ")
-            created_event.set_location(event_loc)
-        except:
-            pass        
+#    # LOCATION
+#    while created_event.get_location() == "":
+#        try:
+#            event_loc = input("Ok, where is this event located? ---> ")
+#            created_event.set_location(event_loc)
+#        except:
+#            pass        
         
     # DURATION    
     while created_event.get_duration() == -1:
@@ -44,41 +44,41 @@ Ok, how long do you expect to be there?:
 up to a maximum value of 48.
 For example, if your event will last 1.5 hours, please enter 3). 
 ---> """))
-            assert 0 <= int(event_length) <= 48, "Your event lasts more than a day."
+            assert 0 <= int(event_length) <= 12, "There is no room on your schedule for this, due to existing events."
             created_event.set_duration(event_length)
         except:
             pass        
         
-    # PRIORITY
-    while created_event.get_priority() == 0:
-        try:
-            event_priority = input("""                               
-Please enter a "priority factor" from the options below:
-    0 - Use Default Prioritization
-    1 - Traffic Conditions
-    2 - Weather
-    3 - Crowd Level
-    4 - Wait Time
-    
-    Your selection: """)
-            if int(event_priority) in created_event.priority_dict:
-                created_event.set_priority(int(event_priority))
-#                created_event.display_event_priority()
-                break
-            else:
-                print("Invalid Selection.")
-        except:
-            pass
+#    # PRIORITY
+#    while created_event.get_priority() == 0:
+#        try:
+#            event_priority = input("""                               
+#Please enter a "priority factor" from the options below:
+#    0 - Use Default Prioritization
+#    1 - Traffic Conditions
+#    2 - Weather
+#    3 - Crowd Level
+#    4 - Wait Time
+#    
+#    Your selection: """)
+#            if int(event_priority) in created_event.priority_dict:
+#                created_event.set_priority(int(event_priority))
+##                created_event.display_event_priority()
+#                break
+#            else:
+#                print("Invalid Selection.")
+#        except:
+#            pass
     return created_event
 
-    # while created_event.get_time() == "-1:00":
-    #     try:
-    #         event_time = input("Please enter the starting time of your event: ")
-    #         assert 0 <= int(event_time[:2]) <= 24, "The hour of your event time is not valid."
-    #         assert 0 <= int(event_time[3:5]) <= 59, "The minutes of your event time is not valid."
-    #         created_event.set_time(event_time)
-    #     except:
-    #         pass
+#     while created_event.get_time() == "-1:00":
+#         try:
+#             event_time = input("Please enter the starting time of your event: ")
+#             assert 0 <= int(event_time[:2]) <= 24, "The hour of your event time is not valid."
+#             assert 0 <= int(event_time[3:5]) <= 59, "The minutes of your event time is not valid."
+#             created_event.set_time(event_time)
+#         except:
+#             pass
 
 
 def main_interactive_one():
@@ -108,29 +108,35 @@ def main_interactive_one():
 
 
 def main_one():
-    event_one = Event(1, name="Tennis", priority=5)
-    event_two = Event(2, name="Scuba Diving", priority=5)
-    static_one = Event(8, name="Work", priority=999, static_flag=True, hours_of_operation=(6, 14))
-    static_two = Event(2, name="Dinner With Parents", priority=999, static_flag=True, hours_of_operation=(20, 22))
+#    event_one = Event(1, name="Tennis", priority=5)
+#    event_two = Event(2, name="Scuba Diving", priority=5)
+    static_one = Event(16, name="WORK", priority=999, static_flag=True, hours_of_operation=(6, 14))
+    static_two = Event(4, name="DINNER WITH PARENTS", priority=999, static_flag=True, hours_of_operation=(20, 22))
     schedule_main_one = Schedule()
-    schedule_main_one.add_event(event_one)
-    # schedule_main_one.display_recommendation("Tennis")
-    schedule_main_one.add_event(event_two)
-    schedule_main_one.display_schedule()
+#   schedule_main_one.add_event(event_one)
+#   schedule_main_one.display_recommendation("Tennis")
+#   schedule_main_one.add_event(event_two)
+#    schedule_main_one.display_schedule()
     schedule_main_one.add_event(static_one)
     schedule_main_one.add_event(static_two)
+    display_welcome_msg()
+    user_event = receive_and_create_event()
+    schedule_main_one.add_event(user_event)
     schedule_main_one.display_schedule()
 
 def main_demo():
-    interactive_schedule = Schedule() # should include 2 static events and random values for space between
+    static_one = Event(16, name="WORK", priority=999, static_flag=True, hours_of_operation=(6, 14))
+    static_two = Event(4, name="DINNER WITH PARENTS", priority=999, static_flag=True, hours_of_operation=(20, 22))
+    schedule_main_one = Schedule()
+    schedule_main_one.add_event(static_one)
+    schedule_main_one.add_event(static_two)
     display_welcome_msg()
     user_event = receive_and_create_event()
-    interactive_schedule.add_event(user_event) # finds the best spot in schedule white space
-    interactive_schedule.display_rec(user_event.get_name()) # search schedule for event and display rec to user
-    interactive_schedule.display_schedule() # display schedule to user
+    schedule_main_one.add_event(user_event)
+    schedule_main_one.display_schedule()
 
 
 if __name__ == "__main__":
-  main_one()
-#    main_demo()
+#   main_one()
+   main_demo()
 #   main_interactive_one()

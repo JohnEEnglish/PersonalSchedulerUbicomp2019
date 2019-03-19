@@ -1,6 +1,7 @@
 from Event import Event
 from Schedule import Schedule
 
+# Comment to update commit message.
 
 def display_welcome_msg():
     print("""

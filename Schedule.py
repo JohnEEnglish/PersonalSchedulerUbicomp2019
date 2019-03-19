@@ -81,7 +81,8 @@ class Schedule:
                                 valid_time = False
                                 # print("temp_slot attributes:", temp_slots[start_time + current_time])
                 except:
-                    print("""DUE TO THE ESTIMATED STATE OF EXTERNAL FACTORS TODAY, SCHEDULING THIS EVENT IS NOT RECOMMENDED.
+                    print("""
+                          DUE TO THE ESTIMATED STATE OF EXTERNAL FACTORS TODAY, SCHEDULING THIS EVENT IS NOT RECOMMENDED.
                           """)
                     break
                 if valid_time:

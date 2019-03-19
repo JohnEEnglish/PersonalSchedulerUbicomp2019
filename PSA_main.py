@@ -25,6 +25,7 @@ def receive_and_create_event():
             event_name = input("What is your event called? ---> ")
             created_event.set_name(event_name)
         except:
+            print("INVALID INPUT")            
             pass
         
 #    # LOCATION
@@ -45,10 +46,18 @@ Ok, how long do you expect to be there?:
 up to a maximum value of 48.
 For example, if your event will last 1.5 hours, please enter 3). 
 ---> """))
-            assert 0 <= int(event_length) <= 12, "There is no room on your schedule for this, due to existing events."
-            created_event.set_duration(event_length)
+            try:
+                assert 0 <= int(event_length) <= 12
+                created_event.set_duration(event_length)
+            except:
+                print("")
+                print("DUE TO EXISTING EVENTS ON YOUR SCHEDULE, THERE IS NO ROOM FOR THIS EVENT, PLEASE TRY AGAIN.")
+                pass          
         except:
-            pass        
+            print("")
+            print("INVALID INPUT")
+            pass
+      
         
 #    # PRIORITY
 #    while created_event.get_priority() == 0:

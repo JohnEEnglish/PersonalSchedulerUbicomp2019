@@ -1,6 +1,14 @@
 from Event import Event
 from Schedule import Schedule
 
+def display_welcome_msg():
+    print("""
+Hello and welcome to the Personal Scheduling Assistant (P.S.A.).
+
+This system will recommend the best time for you to schedule
+a new event, based on a variety of factors.
+    """)   
+
 def receive_and_create_event():
     """
     Receives the input to create an event
@@ -73,12 +81,7 @@ Please enter a "priority factor" from the options below:
 def main_interactive_one():
     user_continue = True
     interactive_schedule = Schedule()
-    print("""
-Hello and welcome to the Personal Scheduling Assistant (P.S.A.).
-
-This system will recommend the best time for you to schedule
-a new event, based on a variety of factors.
-    """)
+    display_welcome_msg()
     while user_continue:
         user_event = receive_and_create_event()
         interactive_schedule.add_event(user_event)
@@ -98,9 +101,8 @@ a new event, based on a variety of factors.
 #            except:
 #                pass
     interactive_schedule.display_schedule()
-    interactive_schedule.display_recommendation(user_event.get_name())
-
-
+    interactive_schedule.display_rec(user_event.get_name())
+    
 def main_one():
     event_one = Event(1, name="Tennis", priority=5)
     event_two = Event(2, name="Scuba Diving", priority=5)
@@ -110,7 +112,15 @@ def main_one():
     schedule_main_one.add_event(event_two)
     schedule_main_one.display_schedule()
 
+def main_demo():
+    interactive_schedule = Schedule() # should include 2 static events and random values for space between
+    display_welcome_msg()
+    user_event = receive_and_create_event()
+    interactive_schedule.add_event(user_event) # finds the best spot in schedule white space
+    interactive_schedule.display_rec(user_event.get_name()) # search schedule for event and display rec to user
+    interactive_schedule.display_schedule() # display schedule to user
 
 if __name__ == "__main__":
-   main_one()
-    # main_interactive_one()
+#   main_one()
+   main_demo()
+#   main_interactive_one()

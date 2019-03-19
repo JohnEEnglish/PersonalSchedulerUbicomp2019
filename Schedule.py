@@ -62,7 +62,7 @@ class Schedule:
                         valid_time = False
                         # print("temp_slot attributes:", temp_slots[start_time + current_time])
                 if valid_time:
-                    assert temp_slots[start_time + current_time][1] == 'No event', "SHITS FUCKED YO"
+                    assert temp_slots[start_time + current_time][1] == 'No event', "ERROR"
                     current_time_index = start_time
                     if event.get_priority() == 5:
                         wait_times = [0] * 9 + [1] * 3 + [2] * 1
@@ -141,11 +141,11 @@ class Schedule:
         return time_slot_list
     
     # Function to display recommended scheduling time to the user   
-    def display_recommendation(self, rec_event_name):
+    def display_rec(self, rec_event_name):
         for e in self.time_slots:
             # print(e)
             if e[1] == rec_event_name:
-                print("Ok, based on your existing calendar events, I recommend you leave for", 
+                print("Ok, based on [external factors], I recommend you leave for", 
                       rec_event_name, "at", e[0])
                 print("""
 Would you like to add this event to your calendar?""")
